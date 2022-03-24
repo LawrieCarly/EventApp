@@ -1,0 +1,32 @@
+[
+  {
+    "model": "events.Event",
+    "pk": 1,
+    "fields": {
+      "title": "Django Meetup",
+      "description": "A meetup for Django developers and people who are interested in Django development. People of all experience levels are welcome, from beginners to pros!",
+      "cost": 0,
+      "datetime": "2040-10-10T16:00:00.000Z"
+    }
+  },
+  {
+    "model": "events.Event",
+    "pk": 2,
+    "fields": {
+      "title": "codebar",
+      "description": "codebar is a charity that facilitates the growth of a diverse tech community by running free regular programming workshops for minority groups in tech.",
+      "cost": 0,
+      "datetime": "2021-1-12T16:00:00.000Z"
+    }
+  },
+  {
+    "model": "events.Event",
+    "pk": 3,
+    "fields": {
+      "title": "Code your future",
+      "description": "CodeYourFuture (CYF) is a UK based non-profit organisation that trains some of the most deprived members of society to become web developers and helps them to find work in the tech industry.",
+      "cost": 0,
+      "datetime": "2032-6-25T10:30:00.000Z"
+    }
+  }
+]

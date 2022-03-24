@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="wrap-content">
+  <div class="card-background half-width">
+    <section class="card">
+      <h2>Log in</h2>
+    </section>
+    <section class="card">
+      {% if form.errors %}
+        <div class="form-errors">
+        {% for input,errors in form.errors.items %}
+          <ul>
+            {% for error in errors %}
+              <li>{{error}}</li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+        </div>
+      {% endif %}
+
+      <form action="{% url 'accounts_login' %}" method="POST" class="login-form page-form">
+        {% csrf_token %}
+
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input required type="text" name="username" id="username">
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input required type="password" name="password" id="password">
+        </div>
+
+        <input type="submit" value="Submit" class="button yellow" />
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    </section>
+  </div>
+</main>
+{% endblock %}

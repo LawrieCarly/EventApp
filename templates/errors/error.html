@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<main>
+    <div class="card-background half-width">
+        <section class="card">
+          <h2>Error: {{ message }}</h2>
+        </section>
+        <section class="card">
+          <img src="{% static 'images/error.gif' %}" alt="">
+        </section>
+      </div>
+</main>
+
+{% endblock %}

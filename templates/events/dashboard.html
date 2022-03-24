@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <main class="cols-2">
+    <section id="upcoming-list" class="card-background">
+      <section class="card">
+        <h2>Your upcoming events</h2>
+      </section>
+      {% include 'partials/_events_list.html' with events=attending %}
+    </section>
+    <section id="past-list" class="card-background">
+      <section class="card">
+        <h2>Your past events</h2>
+      </section>
+      {% if attended|length > 0 %}
+        {% include 'partials/_past_events_list.html' with events=attended %}
+      {% else %}
+      <section class="card">
+        <p class="centered">Events you are attending will appear here.</p>
+      </section>
+      {% endif %}
+    </section>
+  </main>
+{% endblock %}

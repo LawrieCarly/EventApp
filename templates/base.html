@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>EventBulb</title>
+</head>
+<body>
+  <header class="navbar">
+    <section>
+      <img class="logo" src="{% static 'images/logo.jpg' %}" alt="EventBulb Logo">
+      <h1 class="site-heading">EventBulb</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="{% url 'information_home' %}">Home</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'events_dashboard' %}">Dashboard</a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="{% url 'events_list' %}">Events</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
+    <nav class="auth-nav">
+      {% if user.is_authenticated %}
+        <span>Logged in as: <span class="logged-in-username">{{ user.username }}</span></span>
+        <span> | </span>
+        <a href="{% url 'accounts_logout' %}">Log out</a>
+      {% else %}
+        <a href="{% url 'accounts_login' %}">Log In</a>
+        <span> | </span>
+        <a href="{% url 'accounts_register' %}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  {% block content %}
+  {% endblock content %}
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <main class="wrap-content">
+    <div class="card-background half-width event-details">
+      <section class="card event-header">
+        <div class="event-info">
+          <h2 class="event-title">{{ event.title }}</h2>
+          <h3>{{ event.datetime }}</h3>
+        </div>
+      </section>
+      <section class="card">
+        {% if event.image|length > 0 %}
+        <img class="event-image" src="{{ event.image.url }}" alt="">
+      {% else %}
+        <img class="event-image" src="{% static 'images/image_placeholder.jpg' %}" alt="">
+      {% endif %}
+      </section>
+      <section class="card">
+        <p class="event-cost">Price: £{{ event.cost }}</p>
+        <p>{{ event.description }}</p>
+      </section>
+    </div>
+    {% if event.reviews.all|length > 0 or user.is_authenticated %}
+      <div class="card-background half-width">
+        <section class="card">
+          <h3 class="larger-heading">Reviews</h3>
+        </section>
+        {% if user.is_authenticated %}
+          <section class="card">
+            <form class="review-form" action="{% url 'events_add_review' event.id %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+              <div class="input-group">
+                <label for="ratings">Rating</label>
+                <fieldset id="ratings" class="rating-group">
+                  <label for="rating-1">1</label>
+                  <label for="rating-2">2</label>
+                  <label for="rating-3">3</label>
+                  <label for="rating-4">4</label>
+                  <label for="rating-5">5</label>
+                  <input required type="radio" name="rating" value="1" id="rating-1">
+                  <input required type="radio" name="rating" value="2" id="rating-2">
+                  <input required type="radio" name="rating" value="3" id="rating-3">
+                  <input required type="radio" name="rating" value="4" id="rating-4">
+                  <input required type="radio" name="rating" value="5" id="rating-5">
+                </fieldset>
+              </div>
+
+              <div class="input-group full-width">
+                <label for="review-text">Review text</label>
+                <textarea name="review-text" id="review-text" cols="30" rows="3"></textarea>
+              </div>
+
+              <button class="button yellow" type="submit">Submit Comment</button>
+            </form>
+          </section>
+        {% endif %}
+        <div class="reviews-scroller">
+          {% for review in event.reviews.all %}
+            <section class="card">
+                <h3>{{ review.profile }}</h3>
+                <p>{{ review.rating }} stars</p>
+                {% if review.text|length > 0 %}
+                  <p>"{{ review.text }}"</p>
+                {% endif %}
+            </section>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </main>
+{% endblock %}

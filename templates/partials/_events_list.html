@@ -1,0 +1,38 @@
+{% load event_filters %}
+{% load static %}
+
+<ul class="events-list">
+  {% for event in events %}
+  <li class="card event">
+    {% if event.image|length > 0 %}
+    <img class="event-image" src="{{ event.image.url }}" alt="">
+    {% else %}
+    <img class="event-image" src="{% static 'images/image_placeholder.jpg' %}" alt="">
+    {% endif %}
+    <div class="event-info">
+      <h2>{{ event.title }}</h2>
+      <h3>{{ event.datetime }} | £{{ event.cost }}</h3>
+      <p>{{ event.description }}</p>
+    </div>
+    <div class="event-controls">
+      {% if user.is_authenticated %}
+      {% if user|is_attending:event %}
+      <form action="{% url 'events_remove_attending' event.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+        <button type="submit" class="button red">Cancel Attendance</button>
+      </form>
+      {% else %}
+      <form action="{% url 'events_add_attending' event.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+        <button type="submit" class="button yellow">I'm attending</button>
+      </form>
+      {% endif %}
+      {% endif %}
+
+      <a href="{% url 'events_details' event.id %}" class="button gray">Details</a>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <main>
+    <section id="event-list" class="card-background">
+      <section class="card">
+        <h2>Upcoming Events</h2>
+      </section>
+      <section class="card">
+        <form action="{% url 'events_list' %}" method="get" class="filter-controls-form">
+          <div class="filter-controls">
+            <div class="input-group">
+              <label for="is_free">Free?</label>
+              <input type="checkbox" name="is_free" id="is_free" value="0" />
+            </div>
+            <div class="input-group">
+              <label for="title">Search:</label>
+              <input type="text" name="title" id="title">
+            </div>
+          </div>
+
+          <div>
+            <a href="{% url 'events_list' %}" class="button">Clear</a>
+            <button type="submit" class="button gray">
+            Filter
+            </button>
+          </div>
+        </form>
+      </section>
+      {% include 'partials/_events_list.html' with events=events %}
+    </section>
+  </main>
+{% endblock %}

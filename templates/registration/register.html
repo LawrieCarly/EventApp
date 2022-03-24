@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="wrap-content">
+  <div class="card-background half-width">
+    <section class="card">
+      <h2>Register</h2>
+    </section>
+
+    <section class="card">
+      {% if form.errors %}
+        <div class="form-errors">
+        {% for input,errors in form.errors.items %}
+          <ul>
+            {% for error in errors %}
+              <li>{{error}}</li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+        </div>
+      {% endif %}
+
+      <form action="{% url 'accounts_register' %}" method="POST" class="page-form">
+        {% csrf_token %}
+
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input required type="text" name="username" id="username">
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input required type="password" name="password1" id="password">
+        </div>
+
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input required type="password" name="password2" id="confirm-password">
+        </div>
+
+        <input type="submit" value="Register" class="button yellow" />
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    </section>
+  </div>
+</main>
+{% endblock %}

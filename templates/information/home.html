@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <main class="wrap-content">
+    <div class="card-background two-thirds-width">
+      <section class="card">
+        <h2 class="site-heading">Welcome to EventBulb!</h2>
+      </section>
+      <section class="card landing-text-container">
+        <img class="landing-image" src="{% static 'images/logo.jpg' %}" alt="EventBulb Logo">
+        <p class="landing-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem vero reprehenderit eius exercitationem consequuntur repellendus, possimus, fugiat quidem itaque, recusandae nam ut magni pariatur aliquid illo.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem vero reprehenderit eius exercitationem consequuntur repellendus, possimus, fugiat quidem itaque, recusandae nam ut magni pariatur aliquid illo.</p>
+      </section>
+      <section class="card landing-controls">
+        <a class="button yellow" href="{% url 'events_list' %}">EVENTS! EVENTS! EVENTS!</a>
+      </section>
+    </div>
+</main>
+{% endblock content %}
